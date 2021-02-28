@@ -3,6 +3,7 @@ PHP script for stealing cookies, IP grabbing &amp; Device Information.
 
 Usage:
 ```
+git clone https://github.com/4xx404/CookieCatch
 cd CookieCatch
 chmod 755 catch.php
 ```
