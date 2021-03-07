@@ -1,8 +1,6 @@
 # CookieCatch
 PHP script for stealing cookies, IP grabbing &amp; Device Information. 
 
-![image of cookies](https://png.pngtree.com/png-vector/20201010/ourmid/pngtree-cookie-clipart-cartoon-clipart-cookie-png-image_2360129.jpg)
-
 CookieCatch will attemp to steal a targets cookies as well as collect information about the device. Outputs are written in both a textfile & SQLite3 database to allow for easy use of collected data in other tools.
 
 Usage:
