@@ -3,7 +3,7 @@ PHP script for stealing cookies, IP grabbing &amp; Device Information.
 
 CookieCatch will attempt to steal a targets cookies as well as collect information about the device. Outputs are written in both a textfile & SQLite3 database to allow for easy use of collected data in other tools.
 
-Usage:
+Usage
 ```
 git clone https://github.com/4xx404/CookieCatch
 cd CookieCatch
