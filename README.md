@@ -6,9 +6,8 @@ CookieCatch will attempt to steal a targets cookies as well as collect informati
 # Usage
 ```
 git clone https://github.com/4xx404/CookieCatch
-cd CookieCatch
-chmod 777 index.php
-mv ~/CookieCatch /var/www/html/
+mv ~/CookieCatch /var/www/html/ && cd /var/www/html/CookieCatch/
+chmod 777 index.php && cd ../
 php -S localhost:80
 ```
 
