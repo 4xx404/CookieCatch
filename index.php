@@ -38,10 +38,15 @@
 			'/blackberry/i'         =>  'BlackBerry',
 			'/webos/i'              =>  'Mobile');
 
-		foreach ($os_array as $regex => $value)
-			if (preg_match($regex, $user_agent))
+		foreach ($os_array as $regex => $value) {
+			if (preg_match($regex, $user_agent)) {
 				$os_platform = $value;
 				return $os_platform;
+                        } else {
+                                $os_platform = "Unknown Platform";
+                                return $os_platform;
+                        }
+                }
 	}
 
 	function getBrowser() {
@@ -59,10 +64,15 @@
 			'/konqueror/i' => 'Konqueror',
 			'/mobile/i'    => 'Handheld Browser');
 			
-		foreach ($browser_array as $regex => $value)
-			if (preg_match($regex, $user_agent))
+		foreach ($browser_array as $regex => $value) {
+			if (preg_match($regex, $user_agent)) {
 				$browser = $value;
 				return $browser;
+                        } else {
+                                $browser = "Unknown Browser";
+                                return $browser;
+                        }
+                }
 	}
 
 	$user_os = getOS();
