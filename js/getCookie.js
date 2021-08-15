@@ -3,5 +3,6 @@ function getCookie(){
 	var dc = decodedCookie;
 	document.getElementById('cookieval').value = document.cookie;
 	document.getElementById('decodedcookie').value = dc;
-	document.getElementById('submitForm').click();			
+	document.getElementById('submitForm').click();		
+	
 }
