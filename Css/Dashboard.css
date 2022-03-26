@@ -1,0 +1,39 @@
+.catch-row-container {
+    overflow: hidden;
+    margin-left: 10%;
+    width: 80%;
+    background-color: var(--Black);
+    border: 1px solid var(--Silver);
+    border-radius: 2.5rem;
+    color: var(--Blue);
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.catch-display-row-data {
+    display: inline-block;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    color: var(--Blue);
+    text-align: center;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+}
+
+.row-data-span {
+    color: var(--White);
+}
+
+#catch-display-row-data-id, #catch-display-row-data-cookie, #catch-display-row-data-ip, #catch-display-row-data-local, #catch-display-row-data-os {
+    width: 50%;
+}
+
+#catch-display-row-data-decoded, #catch-display-row-data-hostname, #catch-display-row-data-location, #catch-display-row-data-browser, #catch-display-row-data-date {
+    width: 48.75%;
+}
+
+#catch-display-row-data-useragent {
+    width: 100%;
+}
