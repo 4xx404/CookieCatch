@@ -5,7 +5,7 @@ CookieCatch will attempt to steal a target's cookies & store them for access. Co
 You can get an API key by signing up for a free account at [IPInfo](https://ipinfo.io/) which allows 50,000 free requests per month. To set your API key in CookieCatch, edit **Core/init.php** & set the key in **API/IPInfo**.  
 
 # Dashboard  
-In the latest upgrade, I have added a simple web interface for ease of viewing the results. More features will be added to the web interface in updates to come. To use the web interface, start the PHP server & navigate to the [Dashboard](http://127.0.0.1/dashboard.php)  
+In the latest upgrade, I have added a simple web interface for ease of viewing the results. More features will be added to the web interface in updates to come. To use the web interface, start the PHP server & navigate to the dashboard [here](http://127.0.0.1/dashboard.php)  
 
 # Usage
 ```
