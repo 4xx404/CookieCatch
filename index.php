@@ -4,7 +4,6 @@
 	$Database = new Database();
 
 	$IPAddress = Client::GetIP();
-	$IPAddress = ($IPAddress === "127.0.0.1" || $IPAddress === "localhost") ? "34.223.124.221" : $IPAddress;
 
 	$UserAgent = Client::GetUserAgent();
 	$LocalHostName = gethostname();
