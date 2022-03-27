@@ -36,35 +36,6 @@ class HTMLBuilder {
         return "";
     }
 
-    public static function GetResponseContainer($ResponseType = null, $ResponseMessage = null, $UseTimer = true) {
-        $AllowedResponseTypes = ["success", "error"];
-
-        if(($ResponseType !== null && in_array(strtolower($ResponseType), $AllowedResponseTypes)) && $ResponseMessage !== null) {
-            return "
-                <div class=\"" . escape(strtolower($ResponseType)) . "-container\" id=\"" . escape(strtolower($ResponseType)) . "-container\">
-                    " . (($UseTimer === true) ? "<script>ToggleElementDisplayOnTimer(\"none\", \"" . escape(strtolower($ResponseType)) . "-container\");</script>" : "") . "
-                    <p class=\"" . escape(strtolower($ResponseType)) . "-message\" id=\"" . escape(strtolower($ResponseType)) . "-message\">" .  $ResponseMessage . "</p>
-                </div>
-            ";
-        }
-
-        return "";
-    }
-
-    public static function GetNoDataBanner(string $Message = null) {
-        if($Message !== null) {
-            return "<p class=\"no-data-banner\" id=\"no-data-banner\">" . $Message . "</p>";
-        }
-
-        return "";
-    }
-
-    public static function LoadForm(string $FormName = null) {
-        $FormName = isset($FormName) ? escape(ucfirst(strtolower($FormName))) : null;
-
-        return ($FormName !== null) ? "Includes/Forms/" . $FormName . ".php" : "";
-    }
-
     public static function GetHead(string $Title = null, string $LandingPage = null) {
         return "
             <head>
