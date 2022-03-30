@@ -11,7 +11,7 @@ In the latest upgrade, I have added a simple web interface for ease of viewing t
 ```
 git clone https://github.com/4xx404/CookieCatch
 mv ~/CookieCatch /var/www/html/ && cd /var/www/html/CookieCatch/
-sudo chown -R $(whoami) /var/www/html/CookieCatch/*
+sudo chown -R $(whoami) /var/www/html/CookieCatch/
 php -S localhost:80
 ```
 
