@@ -1,3 +1,3 @@
-function Unknown {
+function Unknown() {
   //
 }
