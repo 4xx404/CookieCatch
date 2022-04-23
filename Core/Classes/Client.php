@@ -13,9 +13,9 @@ class Client {
             return $_SERVER["HTTP_FORWARDED"];
         } else if (isset($_SERVER["REMOTE_ADDR"])) {
            return $_SERVER["REMOTE_ADDR"];
-        } else {
-            return null;
         }
+        
+        return null;
     }
 
     public static function GetUserAgent() {
