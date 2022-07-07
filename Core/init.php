@@ -39,10 +39,16 @@ $GLOBALS["Config"] = array(
 	"PassThrough" => array(
 		"Redirect" => "https://www.google.com/"
 	),
+
+	"Functions" => array(
+		"Strings",
+	),
 );
 
 spl_autoload_register(function ($Class) {
 	require_once("Classes/" . ucfirst($Class) . ".php");
 });
 
-require_once("Functions/Sanitize.php");
+foreach($GLOBALS["Config"]["Functions"] as $Function) {
+	require_once("Functions/" . ucfirst($Function) . ".php");
+}

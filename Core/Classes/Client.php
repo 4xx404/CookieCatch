@@ -62,14 +62,14 @@ class Client {
 		$BrowserArray = array(
 			"/msie/i"      => "Internet Explorer",
 			"/firefox/i"   => "Firefox",
-			"/safari/i"    => "Safari",
 			"/chrome/i"    => "Chrome",
 			"/edge/i"      => "Edge",
 			"/opera/i"     => "Opera",
 			"/netscape/i"  => "Netscape",
 			"/maxthon/i"   => "Maxthon",
 			"/konqueror/i" => "Konqueror",
-			"/mobile/i"    => "Handheld Browser"
+			"/mobile/i"    => "Handheld Browser",
+            "/safari/i"    => "Safari",
 		);
 			
 		foreach ($BrowserArray as $Regex => $Browser) {
@@ -81,27 +81,29 @@ class Client {
 		return null;
 	}
 
+    public static function HasLocationKey(string $LocationKey = null, array $Location = null, bool $Nullify = false): string|null {
+        return (($LocationKey !== null && $Location !== null) && (is_array($Location) && count($Location) > 0) && array_key_exists(lowercase($LocationKey), $Location) ? $Location[lowercase($LocationKey)]: (($Nullify === true) ? null : "Unknown"));
+    }
+
     public static function GetLocation(string $IPAddress = null) {
-        if($IPAddress !== null) {
-            try {
-                $Json = file_get_contents("http://ipinfo.io/" . $IPAddress . "?token=" . Config::Get("AppData/API/IPInfo"));
-                $Location = json_decode($Json, true);
-                if(array_key_exists("timezone", $Location)) {
-                    return array(
-                        "ip_address" => $IPAddress,
-                        "city" => ($Location["city"] !== null) ? $Location["city"] : "Unknown",
-                        "region" => ($Location["region"] !== null) ? strtolower($Location["region"]) : "Unknown",
-                        "country" => ($Location["country"] !== null) ? strtolower($Location["country"]) : "Unknown",
-                        "latitude" => ($Location["loc"] !== null) ? explode(",", $Location["loc"])[0] : "Unknown",
-                        "longitude" => ($Location["loc"] !== null) ? explode(",", $Location["loc"])[1] : "Unknown",
-                        "full_location" => StringFormatter::BuildFullLocationString($Location["city"], $Location["region"], $Location["country"]),
-                        "service_provider" => ($Location["org"] !== null) ? $Location["org"] : "Unknown",
-                        "timezone" => ($Location["timezone"] !== null) ? $Location["timezone"] : "Unknown"
-                    );
-                }
-            } catch(Exception $e) {
-                Logger::Error("get-location", $e);
-            }
+        $APIKey = ((!empty(Config::Get("AppData/API/IPInfo")) && Validate::IPInfoAPIKey(Config::Get("AppData/API/IPInfo"))) ? Config::Get("AppData/API/IPInfo") : null);
+        $Json = (($APIKey !== null) ? (($IPAddress !== null && Validate::IPAddress($IPAddress) === true) ? file_get_contents("http://ipinfo.io/{$IPAddress}?token={$APIKey}") : false) : false);
+        $Location = (($Json !== false) ? json_decode($Json, true) : null);
+
+        if($Location !== null) {
+            return array(
+                "ip_address" => $IPAddress,
+                "city" => self::HasLocationKey("city", $Location),
+                "region" => self::HasLocationKey("region", $Location),
+                "country" => self::HasLocationKey("country", $Location),
+                "latitude" => ((array_key_exists("loc", $Location)) ? explode(",", $Location["loc"])[0] : "Unknown"),
+                "longitude" => ((array_key_exists("loc", $Location)) ? explode(",", $Location["loc"])[1] : "Unknown"),
+                "full_location" => StringFormatter::BuildFullLocationString(self::HasLocationKey("city", $Location, true), self::HasLocationKey("region", $Location, true), self::HasLocationKey("country", $Location, true)),
+                "service_provider" => self::HasLocationKey("org", $Location),
+                "timezone" => self::HasLocationKey("timezone", $Location),
+            );
+        } else {
+            Logger::Error("get-location");
         }
 
         return null;

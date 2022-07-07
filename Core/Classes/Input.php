@@ -18,12 +18,6 @@ class Input {
 	}
 	
 	public static function Get($Item) {
-		if(isset($_POST[$Item])) {
-			return $_POST[$Item];
-		} else if(isset($_GET[$Item])) {
-			return $_GET[$Item];
-		}
-
-		return "";
+		return ((isset($_POST[$Item])) ? $_POST[$Item] : ((isset($_GET[$Item])) ? $_GET[$Item] : ""));
 	}
 }

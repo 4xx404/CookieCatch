@@ -59,13 +59,7 @@ class HTMLBuilder {
     }
 
     private static function DashboardHeader(bool $WithSearch = false) {
-        if(!$WithSearch) {
-            echo "
-                <div class=\"header\" id=\"header\">
-                    <a href=\"dashboard.php\" class=\"logo\" id=\"logo\">" . escape(Config::Get("AppData/Name")) . "</a>
-                </div>
-            ";
-        } else {
+        if($WithSearch) {
             echo "
                 <div class=\"header\" id=\"header\">
                     <a href=\"dashboard.php\" class=\"logo\" id=\"logo\">" . escape(Config::Get("AppData/Name")) . "</a>
@@ -80,6 +74,12 @@ class HTMLBuilder {
                     </form>
                 </div>
             ";
+        } else {
+            echo "
+                <div class=\"header\" id=\"header\">
+                    <a href=\"dashboard.php\" class=\"logo\" id=\"logo\">" . escape(Config::Get("AppData/Name")) . "</a>
+                </div>
+            ";            
         }
     }
 

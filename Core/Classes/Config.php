@@ -7,9 +7,7 @@ class Config {
 			$Path = explode("/", $Path);
 
 			foreach($Path as $Bit) {
-				if(isset($Config[$Bit])) {
-					$Config = $Config[$Bit];
-				}
+				((isset($Config[$Bit])) ? $Config = $Config[$Bit] : null);
 			}
 			
 			return $Config;

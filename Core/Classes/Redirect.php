@@ -12,7 +12,7 @@ class Redirect {
 				}
 			}
 
-			header("Location: " . $Location);
+			header("Location: {$Location}");
 			exit();
 		}
 	}	

@@ -1,6 +1,6 @@
 <?php
 class Hash {
 	public static function Make($String = null) {
-		return md5(uniqid());
+		return (($String !== null) ? md5($String) : md5(uniqid()));
 	}
 }

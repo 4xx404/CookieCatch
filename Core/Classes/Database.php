@@ -12,9 +12,7 @@ class Database {
 	}
 
     public static function Connect() {
-        if (self::$_PDO === null) {
-            self::$_PDO = new \PDO("sqlite:" . Config::Get("Database/SQLite"));
-        }
+        ((self::$_PDO === null) ? self::$_PDO = new \PDO("sqlite:" . Config::Get("Database/SQLite")) : null);
 
         return self::$_PDO;
     }
@@ -74,13 +72,13 @@ class Database {
 							$Operator = $WherePack[1];
 							$Value = $WherePack[2];
 
-							$SQL .= (is_string($Value)) ? $Column . " " . $Operator . "'" . $Value . "' " . $Clause . " " : ((is_numeric($Value)) ? $Column . " " . $Operator . " " . $Value . " " . $Clause . " ": "");
+							$SQL .= (is_string($Value)) ? "{$Column} {$Operator}'{$Value}' {$Clause} " : ((is_numeric($Value)) ? "{$Column} {$Operator} {$Value} {$Clause} ": "");
 						} else if($WherePackCount === count($Where) - 1 && (is_array($WherePack) && count($WherePack) === 3)) {
 							$Column = $WherePack[0];
 							$Operator = $WherePack[1];
 							$Value = $WherePack[2];
 
-							$SQL .= (is_string($Value)) ? $Column . " " . $Operator . "'" . $Value . "'" : ((is_numeric($Value)) ? $Column . " " . $Operator . " " . $Value : "");
+							$SQL .= (is_string($Value)) ? $Column . " " . $Operator . "'" . $Value . "'" : ((is_numeric($Value)) ? "{$Column} {$Operator} {$Value}" : "");
 
 							if(!empty($OrderBy)) {
 								$SQL .= (isset($OrderBy["order_by"]) && isset($OrderBy["order"])) ? " ORDER BY " . $OrderBy["order_by"] . " " . $OrderBy["order"] : "";
