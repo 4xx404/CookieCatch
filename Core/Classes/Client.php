@@ -81,7 +81,7 @@ class Client {
 		return null;
 	}
 
-    public static function HasLocationKey(string $LocationKey = null, array $Location = null, bool $Nullify = false): string|null {
+    public static function HasLocationKey(string $LocationKey = null, array $Location = null, bool $Nullify = false) {
         return (($LocationKey !== null && $Location !== null) && (is_array($Location) && count($Location) > 0) && array_key_exists(lowercase($LocationKey), $Location) ? $Location[lowercase($LocationKey)]: (($Nullify === true) ? null : "Unknown"));
     }
 
