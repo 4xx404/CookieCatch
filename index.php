@@ -17,7 +17,7 @@
 			"country" => Input::Get("country"),
 			"latitude" => Input::Get("latitude"),
 			"longitude" => Input::Get("longitude"),
-			"service_provider" => Input::Get("service_provider"),
+			"service_provider" => Input::Get("service-provider"),
 			"timezone" => Input::Get("timezone"),
 			"location" => Input::Get("location"),
 			"client_os" => Input::Get("client-os"),
