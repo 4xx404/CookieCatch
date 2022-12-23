@@ -1,7 +1,7 @@
 <?php
 class StringFormatter {
-    public static function GetDateTime(): string {
-        return date("Y-m-d H:i:s");
+    public static function GetDateTime(bool $IncludeSeconds = true, bool $AmOrPm = false): string {
+        return date("Y-m-d H:i" . (($IncludeSeconds === true) ? ":s" : "") .  (($AmOrPm === true) ? "a" : ""));
     }
 
     public static function GetDate(): string {
@@ -15,10 +15,24 @@ class StringFormatter {
     public static function BuildFullLocationString(string $City = null, string $Region = null, string $Country = null): string {
         $FullLocationString = null;
 
-        ($City !== null) ? $FullLocationString = $City . ", " : $FullLocationString = "Unknown City, ";
-        ($Region !== null) ? $FullLocationString .= $Region . ", " : $FullLocationString .= "Unknown Region, ";
-        ($Country !== null) ? $FullLocationString .= $Country . ", " : $FullLocationString .= "Unknown Country";
+        if($City !== null) {
+            $FullLocationString = "{$City}";
+        } else {
+            $FullLocationString = "Unknown City";
+        }
 
+        if($Region !== null) {
+            $FullLocationString .= ", {$Region}";
+        } else {
+            $FullLocationString .= ", Unknown Region";
+        }
+
+        if($Country !== null) {
+            $FullLocationString .= ", {$Country}";
+        } else {
+            $FullLocationString .= ", Unknown Country";
+        }
+        
         return $FullLocationString;
     }
 }

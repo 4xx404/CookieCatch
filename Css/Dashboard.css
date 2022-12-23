@@ -1,39 +1,154 @@
-.catch-row-container {
-    overflow: hidden;
-    margin-left: 10%;
-    width: 80%;
-    background-color: var(--Black);
-    border: 1px solid var(--Silver);
-    border-radius: 2.5rem;
-    color: var(--Blue);
+@import "Generic.css";
+
+/* Desktop first */
+.catch-details-container {
+    float: left;
+    margin: 0 auto;
+    margin-top: 1.25rem;
+    margin-left: 1.25%;
+    margin-bottom: 1.25rem;
+    width: 97.5%;
+    border: 2px solid var(--Blue);
+    border-radius: 1.25rem;
     padding: 0.5rem;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
 }
 
-.catch-display-row-data {
-    display: inline-block;
-    padding-top: 0.25rem;
-    padding-bottom: 0.25rem;
-    color: var(--Blue);
+.catch-details-header-container {
+    float: left;
+    margin: 0 auto;
+    margin-left: 1.25%;
+    width: 97.5%;
+    padding: 0.5rem;
     text-align: center;
-    font-size: 1rem;
+    font-size: 1.75rem;
     font-weight: bold;
-    border: none;
 }
 
-.row-data-span {
+.catch-id-container {
+    float: left;
+    margin: 0 auto;
+    width: 40%;
+    height: fit-content;
+    padding: 0.5rem;
+    text-align: left;
+}
+
+.catch-date-container {
+    float: right;
+    margin: 0 auto;
+    width: 30%;
+    height: fit-content;
+    padding: 0.5rem;
+    text-align: right;
+}
+
+.catch-id-text, .catch-date-text {
+    color: var(--Blue);
+    font-size: 2rem;
+    font-weight: bold;   
+}
+
+.catch-id-inner-span, .catch-date-inner-span {
     color: var(--White);
+    font-size: 2rem;
+    font-weight: normal;
 }
 
-#catch-display-row-data-id, #catch-display-row-data-cookie, #catch-display-row-data-ip, #catch-display-row-data-local, #catch-display-row-data-os {
-    width: 50%;
+.catch-details-inner-container {
+    float: left;
+    display: flex;
+    justify-content: space-evenly;
+    margin: 0 auto;
+    margin-left: 1.25%;
+    width: 97.5%;
+    height: fit-content;
+    max-height: 22rem;
+    border-radius: 1.25rem;
+    padding: 0.5rem;
 }
 
-#catch-display-row-data-decoded, #catch-display-row-data-hostname, #catch-display-row-data-location, #catch-display-row-data-browser, #catch-display-row-data-date {
-    width: 48.75%;
+.catch-details-cookie-container {
+    float: left;
+    margin: 0 auto;
+    width: 32%;
+    border: 1px solid var(--Green);
+    border-radius: 1.25rem;
+    overflow: auto;
+    overflow-y: none;
 }
 
-#catch-display-row-data-useragent {
+.catch-details-device-container {
+    float: left;
+    margin: 0 auto;
+    width: 32%;
+    border: 1px solid orange;
+    border-radius: 1.25rem;
+    overflow: auto;
+    overflow-y: none;
+}
+
+.catch-details-location-container {
+    float: left;
+    margin: 0 auto;
+    width: 32%;
+    border: 1px solid var(--Red);
+    border-radius: 1.25rem;
+    overflow: auto;
+    overflow-y: none;
+}
+
+.catch-details-tile-header-container { 
+    float: left;
+    margin: 0 auto;
     width: 100%;
+    padding: 0.5rem;
+    padding-left: 0;
+}
+
+.catch-details-tile-header {
+    float: left;
+    margin: 0 auto;
+    width: 100%;
+    padding: 0.5rem;
+    padding-left: 0.75rem;
+    background-color: var(--Black);
+    color: var(--Blue);
+    text-align: left;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.catch-display-row-data-tile {
+    float: left;
+    margin: 0 auto;
+    width: 100%;
+    height: fit-content;
+    color: var(--Blue);
+    user-select: none;
+    font-weight: bold;
+    padding-left: 0.75rem;
+}
+
+.row-data-span-tile {
+    color: var(--White);
+    user-select: text;
+    font-weight: normal;
+}
+
+/* Design for mobile displays from w:360 × h:640 through w:414 × h:896
+Mobile */
+@media screen and (min-device-width: 320px) and (max-device-width: 414px) and (min-device-height: 640px) and (max-device-height: 896px) {
+
+}
+
+/* Design for tablet displays from w:601 × h:962 through w:1280 × h:800
+Tablets/Medium Sized Devices */
+@media screen and (min-device-width: 601px)  and (min-device-height: 800px) and (max-device-width: 1280px) and (max-device-height: 962px) {
+
+}
+
+/* Design for desktop displays from w:1024 × h:768 through w:1920 × h:1080
+Desktops/TVs */
+@media screen and (min-device-width: 1281px) and (max-device-width: 1920px) and (min-device-height: 768px) and (max-device-height: 1080px) {
+
 }

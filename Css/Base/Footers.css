@@ -1,0 +1,50 @@
+.footer {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	background-color: var(--Black);
+	border: 2px solid var(--Black);
+	user-select: none;
+}
+
+.footer-text {
+	font-weight: bold;
+	background: none;
+	color: var(--Blue);
+	text-align: center;
+	border: none;
+}
+
+.footer-brand-link, .footer-brand-link:hover, .footer-brand-link:focus {
+	color: var(--Blue);
+	text-decoration: none;
+	cursor: pointer;
+}
+
+/* Design for mobile displays from w:360 × h:640 through w:414 × h:896
+Mobile */
+@media screen and (min-device-width: 320px) and (max-device-width: 414px) and (min-device-height: 640px) and (max-device-height: 896px) {	
+	.footer-text {
+		font-size: 1.75rem;
+		padding: 0.5rem;
+	}
+}
+
+/* Design for tablet displays from w:601 × h:962 through w:1280 × h:800
+Tablets/Medium Sized Devices */
+@media screen and (min-device-width: 601px)  and (min-device-height: 800px) and (max-device-width: 1280px) and (max-device-height: 962px) {
+	.footer-text {
+		font-size: 1.875rem;
+		padding: 0.75rem;
+	}
+}
+
+/* Design for desktop displays from w:1024 × h:768 through w:1920 × h:1080
+Desktops/TVs */
+@media screen and (min-device-width: 1281px) and (max-device-width: 1920px) and (min-device-height: 768px) and (max-device-height: 1080px) {
+	.footer-text {
+		font-size: 2rem;
+		padding: 0.5rem;
+	}
+}

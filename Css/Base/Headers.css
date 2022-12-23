@@ -1,0 +1,103 @@
+@import "Placeholders.css";
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    background-color: var(--Black);
+    border: none;
+}
+
+.header-brand-logo {
+    width: auto;
+    font-weight: bold;
+    background: none;
+    color: var(--Blue);
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.search-bar-container {
+    display: inline-block;
+    width: 30%;
+    height: inherit;
+    border-radius: 0.5rem;
+}
+
+.search-bar-input {
+    float: left;
+    margin: 0 auto;
+    width: 70%;
+    height: 4.625rem;
+    font-size: 1.75rem;
+    font-weight: bold;
+    padding: 0.5rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    background-color: var(--Black);
+    color: var(--White);
+    border: none;
+    outline: none;
+}
+
+.search-bar-input:hover, .search-bar-input:focus {
+    border: 1px solid var(--Blue);
+    border-radius: 1.25rem;
+}
+
+.toggle-search-type {
+    float: left;
+    margin: 0 auto;
+    width: 30%;
+    height: 4.625rem;
+    font-size: 1.75rem;
+    padding: 0.5rem;
+    text-align: center;
+    background-color: var(--Black);
+    color: var(--White);
+    font-size: 1.75rem;
+    font-weight: bold;
+    border: none;
+    outline: none;
+}
+
+.toggle-search-type:hover, .toggle-search-type:focus {
+    border: 1px solid var(--Blue);
+    border-radius: 1.25rem;
+}
+
+/* Design for mobile displays from w:360 × h:640 through w:414 × h:896
+Mobile */
+@media screen and (min-device-width: 320px) and (max-device-width: 414px) and (min-device-height: 640px) and (max-device-height: 896px) {
+    .header-brand-logo {
+        float: left;
+        padding: 0.25rem;
+        padding-left: 0.75rem;
+        font-size: 2.5rem;
+    }
+}
+
+/* Design for tablet displays from w:601 × h:962 through w:1280 × h:800
+Tablets/Medium Sized Devices */
+@media screen and (min-device-width: 601px)  and (min-device-height: 800px) and (max-device-width: 1280px) and (max-device-height: 962px) {
+    .header-brand-logo {
+        float: left;
+        padding: 0.25rem;
+        margin-left: 0.75rem;
+        font-size: 2.5rem;
+    }
+}
+
+/* Design for desktop displays from w:1024 × h:768 through w:1920 × h:1080
+Desktops/TVs */
+@media screen and (min-device-width: 1281px) and (max-device-width: 1920px) and (min-device-height: 768px) and (max-device-height: 1080px) {
+    .header-brand-logo {
+        float: left;
+        padding: 0.25rem;
+        padding-left: 0.75rem;
+        font-size: 3rem;
+    }
+}

@@ -1,0 +1,14 @@
+/* Chrome, Firefox, Opera, Safari 10.1+, ... */
+::placeholder, ::-moz-placeholder, .form-control::-moz-placeholder {
+    color: var(--White);
+    opacity: 1;
+}
+
+/* Internet Explorer 10-11 (+ Bootstrap.form-control), Microsoft Edge, ... */
+:-ms-input-placeholder,
+::-ms-input-placeholder,
+.form-control:-ms-input-placeholder,
+.form-control::-webkit-input-placeholder,
+::-webkit-input-placeholder {
+    color: var(--White);
+}

@@ -1,5 +1,62 @@
-* {
-    margin: 0;
-    padding: 0;
+/* Reset all elements & pseudo-elements */
+*, *::before, *::after {
     box-sizing: border-box;
+    outline: none !important;
+}
+
+/* Remove default margin */
+h1, h2, h3, h4, p, li, figure, figcaption, blockquote, dl, dd {
+    margin: 0 auto;
+}
+
+input {
+    color: #000000;
+}
+
+/* Set smooth scrolling */
+html:focus-within {
+    scroll-behavior: smooth;
+}
+
+/* Reset list-styles */
+ul[role="list"], ol[role="list"] {
+    list-style: none; /* Helps with some accessibility issues */
+}
+
+a {
+    color: #000000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+a:hover, a:focus {
+    color: #000000;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+/* Renders underline in a more readable fashion */
+a:not([class]) {
+    text-decoration-skip-ink: auto;
+}
+
+/* Fluid Image styles */
+img {
+    max-width: 100%;
+    display: block; /* Removes weird gap at bottom of images */
+}
+
+/* Remove small mono text */
+input, button, textarea, select {
+    font: inherit;
+}
+
+/* Reset animations, transitions & scroll behaviour if the user prefers reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }

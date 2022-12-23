@@ -1,0 +1,130 @@
+.content-container {
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 5rem;
+    overflow: auto;
+    overflow-x: none;
+    border: none;
+}
+
+.no-data-container {
+    background: var(--DimRed);
+    border: 2px solid var(--Red);
+    border-radius: 1.25rem;
+    text-align: center;
+    user-select: none;
+}
+
+.no-data-container-text {
+    margin: 0 auto;
+    color: var(--White);
+    background: none;
+    text-align: center;
+    font-weight: bold;
+}
+
+.response-container-error, .response-container-success {
+    display: none;
+    margin: 0 auto;
+    text-align: center;
+    color: var(--White);
+    border-radius: 1.25rem;
+    font-weight: bold;
+
+    z-index: 99;
+}
+
+.response-container-error {
+    background: var(--Red);
+    border: 2px solid var(--DimRed);
+}
+
+.response-container-success {
+    background: var(--Green);
+    border: 2px solid var(--DimGreen);
+}
+
+/* Design for mobile displays from w:360 × h:640 through w:414 × h:896
+Mobile */
+@media screen and (min-device-width: 320px) and (max-device-width: 414px) and (min-device-height: 640px) and (max-device-height: 896px) {
+    .content-container {
+        min-height: 85%;
+    }
+
+    .no-data-container {
+        padding: 1.25rem;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+
+    .no-data-container-text {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    .response-container-error, .response-container-success {
+        width: 90%;
+        margin-top: 1.25rem;
+        padding: 1.25rem;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+        font-size: 1.5rem;
+        line-height: 1.5rem;
+    }
+}
+
+/* Design for tablet displays from w:601 × h:962 through w:1280 × h:800
+Tablets/Medium Sized Devices */
+@media screen and (min-device-width: 601px) and (min-device-height: 800px) and (max-device-width: 1280px) and (max-device-height: 962px) {
+    .content-container {
+        min-height: 87.5%;
+    }
+
+    .no-data-container {
+        padding: 1.25rem;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+
+    .no-data-container-text {
+        font-size: 1.125rem;
+    }
+
+    .response-container-error, .response-container-success {
+        width: 80%;
+        margin-top: 1.5rem;
+        padding: 1.25rem;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+        font-size: 1.75rem;
+        line-height: 1.5rem;
+    }
+}
+
+/* Design for desktop displays from w:1024 × h:768 through w:1920 × h:1080
+Desktops/TVs */
+@media screen and (min-device-width: 1281px) and (max-device-width: 1920px) and (min-device-height: 768px) and (max-device-height: 1080px) {
+    .content-container {
+        min-height: 89.25%;
+    }
+
+    .no-data-container {
+        padding: 1.25rem;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+
+    .no-data-container-text {
+        font-size: 1.25rem;
+    }
+
+    .response-container-error, .response-container-success {
+        width: 60%;
+        margin-top: 1.75rem;
+        padding: 1.25rem;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+        font-size: 2rem;
+        line-height: 1.5rem;
+    }
+}

