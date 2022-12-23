@@ -27,7 +27,6 @@
 	}
 
 	$IPAddress = Client::GetIP();
-	$IPAddress = (($IPAddress === "127.0.0.1" || $IPAddress === "localhost") ? "84.234.221.12" : $IPAddress);
 ?>
 <!DOCTYPE html>
 <html lang="<?= getLanguage(); ?>">
