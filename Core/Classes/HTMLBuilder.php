@@ -31,7 +31,10 @@ class HTMLBuilder {
         if($WithSearch === true) {
             echo "
                 <div id=\"header\" class=\"header\">
-                    <button type=\"button\" id=\"header-brand-logo\" class=\"header-brand-logo\">" . Config::Get("AppData/Name") . "</button>
+                    <div id=\"header-brand-logo-container\" class=\"header-brand-logo-container\">
+                        <img src=\"Favicon.png\" id=\"header-brand-logo-image\" class=\"header-brand-logo-image\" />
+                        <button type=\"button\" id=\"header-brand-logo\" class=\"header-brand-logo\">" . Config::Get("AppData/Name") . "</button>
+                    </div>
             
                     <div id=\"search-bar-container\" class=\"search-bar-container\">
                         <form class=\"search-form\" id=\"search-form\">
@@ -50,9 +53,12 @@ class HTMLBuilder {
         } else {
             echo "
                 <div class=\"header\" id=\"header\">
-                    <button type=\"button\" id=\"header-brand-logo\" class=\"header-brand-logo\">" . Config::Get("AppData/Name") . "</button>
+                    <div id=\"header-brand-logo-container\" class=\"header-brand-logo-container\">
+                        <img src=\"Favicon.png\" id=\"header-brand-logo-image\" class=\"header-brand-logo-image\" />
+                        <button type=\"button\" id=\"header-brand-logo\" class=\"header-brand-logo\">" . Config::Get("AppData/Name") . "</button>
+                    </div>
                 </div>
-            ";            
+            ";
         }
     }
 
