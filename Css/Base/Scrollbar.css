@@ -1,0 +1,25 @@
+/* width */
+::-webkit-scrollbar {
+    width: 0;
+    visibility: hidden;
+}
+  
+/* Track */
+::-webkit-scrollbar-track {
+    background: var(--Black);
+    visibility: hidden;
+}
+  
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--Black);
+    border: 1px solid var(--Green);
+    border-radius: 2.5rem;
+    visibility: hidden;
+}
+  
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: var(--Black);
+    visibility: hidden;
+} 

@@ -22,63 +22,68 @@ class Client {
         return (isset($_SERVER["HTTP_USER_AGENT"])) ? escape($_SERVER["HTTP_USER_AGENT"]) : null;
     }
 
-    public static function GetOS($UserAgent){
-		$OSArray = array(
-			"/windows nt 10/i"      =>  "Windows 10",
-			"/windows nt 6.3/i"     =>  "Windows 8.1",
-			"/windows nt 6.2/i"     =>  "Windows 8",
-			"/windows nt 6.1/i"     =>  "Windows 7",
-			"/windows nt 6.0/i"     =>  "Windows Vista",
-			"/windows nt 5.2/i"     =>  "Windows Server 2003/XP x64",
-			"/windows nt 5.1/i"     =>  "Windows XP",
-			"/windows xp/i"         =>  "Windows XP",
-			"/windows nt 5.0/i"     =>  "Windows 2000",
-			"/windows me/i"         =>  "Windows ME",
-			"/win98/i"              =>  "Windows 98",
-			"/win95/i"              =>  "Windows 95",
-			"/win16/i"              =>  "Windows 3.11",
-			"/macintosh|mac os x/i" =>  "Mac OS X",
-			"/mac_powerpc/i"        =>  "Mac OS 9",
-			"/linux/i"              =>  "Linux",
-			"/ubuntu/i"             =>  "Ubuntu",
-			"/iphone/i"             =>  "iPhone",
-			"/ipod/i"               =>  "iPod",
-			"/ipad/i"               =>  "iPad",
-			"/android/i"            =>  "Android",
-			"/blackberry/i"         =>  "BlackBerry",
-			"/webos/i"              =>  "Mobile"
-		);
+    public static function GetOS($UserAgent = null) {
+        if($UserAgent !== null) {
+            $OperatingSystemRegexList = array(
+                "/android/i"            =>  "Android",
+                "/blackberry/i"         =>  "BlackBerry",
+                "/ipad/i"               =>  "iPad",
+                "/iphone/i"             =>  "iPhone",
+                "/ipod/i"               =>  "iPod",
+                "/linux/i"              =>  "Linux",
+                "/mac_powerpc/i"        =>  "Mac OS 9",
+                "/macintosh|mac os x/i" =>  "Mac OS X",
+                "/ubuntu/i"             =>  "Ubuntu",
+                "/webos/i"              =>  "Mobile",                
+                "/win16/i"              =>  "Windows 3.11",
+                "/win95/i"              =>  "Windows 95",
+                "/win98/i"              =>  "Windows 98",
+                "/windows me/i"         =>  "Windows ME",
+                "/windows nt 5.0/i"     =>  "Windows 2000",
+                "/windows xp/i"         =>  "Windows XP",
+                "/windows nt 5.1/i"     =>  "Windows XP",
+                "/windows nt 5.2/i"     =>  "Windows Server 2003/XP x64",
+                "/windows nt 6.0/i"     =>  "Windows Vista",
+                "/windows nt 6.1/i"     =>  "Windows 7",
+                "/windows nt 6.2/i"     =>  "Windows 8",
+                "/windows nt 6.3/i"     =>  "Windows 8.1",
+                "/windows nt 10/i"      =>  "Windows 10",
+                "/windows nt 11/i"      =>  "Windows 11",
+            );
 
-		foreach ($OSArray as $Regex => $Platform) {
-			if(preg_match($Regex, $UserAgent)) {
-				return $Platform;
-			}
-		}
+            foreach($OperatingSystemRegexList as $Regex => $Platform) {
+                if(preg_match($Regex, $UserAgent)) {
+                    return $Platform;
+                }
+            }
+        }
 
-		return null;
+        return null;
 	}
 
-    public static function GetBrowser($UserAgent) {
-		$BrowserArray = array(
-			"/msie/i"      => "Internet Explorer",
-			"/firefox/i"   => "Firefox",
-			"/chrome/i"    => "Chrome",
-			"/edge/i"      => "Edge",
-			"/opera/i"     => "Opera",
-			"/netscape/i"  => "Netscape",
-			"/maxthon/i"   => "Maxthon",
-			"/konqueror/i" => "Konqueror",
-			"/mobile/i"    => "Handheld Browser",
-            "/safari/i"    => "Safari",
-		);
-			
-		foreach ($BrowserArray as $Regex => $Browser) {
-            if(preg_match($Regex, $UserAgent)) {
-                return $Browser;
+    public static function GetBrowser($UserAgent = null) {
+		if($UserAgent !== null) {
+            $Browsers = array(
+                "/chrome/i"    => "Chrome",
+                "/edge/i"      => "Edge",
+                "/firefox/i"   => "Firefox",
+                "/konqueror/i" => "Konqueror",
+                "/maxthon/i"   => "Maxthon",
+                "/mobile/i"    => "Handheld Browser",
+                "/msie/i"      => "Internet Explorer",
+                "/netscape/i"  => "Netscape",
+                "/opera/i"     => "Opera",
+                "/safari/i"    => "Safari",
+            );
+                
+            foreach($Browsers as $Regex => $Browser) {
+                if(preg_match($Regex, $UserAgent)) {
+                    return $Browser;
+                }
             }
-		}
+        }
 
-		return null;
+        return null;
 	}
 
     public static function HasLocationKey(string $LocationKey = null, array $Location = null, bool $Nullify = false) {
@@ -99,7 +104,7 @@ class Client {
                 "latitude" => ((array_key_exists("loc", $Location)) ? explode(",", $Location["loc"])[0] : "Unknown"),
                 "longitude" => ((array_key_exists("loc", $Location)) ? explode(",", $Location["loc"])[1] : "Unknown"),
                 "full_location" => StringFormatter::BuildFullLocationString(self::HasLocationKey("city", $Location, true), self::HasLocationKey("region", $Location, true), self::HasLocationKey("country", $Location, true)),
-                "service_provider" => self::HasLocationKey("org", $Location),
+                "service_provider" => self::HasLocationKey("org", $Location, true),
                 "timezone" => self::HasLocationKey("timezone", $Location),
             );
         } else {

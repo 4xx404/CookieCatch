@@ -1,0 +1,28 @@
+body, html {
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    background-color: var(--Black);
+    font-family: Helvetica, Arial, sans-serif;
+    overflow: auto;
+    overflow-y: none;
+    scrollbar-color: var(--Blue) var(--Black);
+}
+
+/* Design for mobile displays from w:360 × h:640 through w:414 × h:896
+Mobile */
+@media screen and (min-device-width: 320px) and (max-device-width: 414px) and (min-device-height: 640px) and (max-device-height: 896px) {
+
+}
+
+/* Design for tablet displays from w:601 × h:962 through w:1280 × h:800
+Tablets/Medium Sized Devices */
+@media screen and (min-device-width: 601px) and (min-device-height: 800px) and (max-device-width: 1280px) and (max-device-height: 962px) {
+
+}
+
+/* Design for desktop displays from w:1024 × h:768 through w:1920 × h:1080
+Desktops/TVs */
+@media screen and (min-device-width: 1281px) and (max-device-width: 1920px) and (min-device-height: 768px) and (max-device-height: 1080px) {
+
+}

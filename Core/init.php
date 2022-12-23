@@ -26,12 +26,6 @@ $GLOBALS["Config"] = array(
 		"ErrorResponder" => "full"
     ),
 
-	"AssetURLs" => array(
-		"Favicon" => "Assets/Favicon.ico",
-		"FontAwesome" => "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css",
-		"JQuery" => "https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js",
-	),
-
 	"Database" => array(
 		"SQLite" => "Core/Database/CookieCatch.db",
 	),
