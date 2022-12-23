@@ -227,7 +227,7 @@ class HTMLBuilder {
         ";
     }
 
-    public static function GetResponseContainer(string|array $ResponseType = null) {
+    public static function GetResponseContainer($ResponseType = null) {
         $LegalResponseContainerTypes = ["success", "error"];
 
         if($ResponseType !== null) {
@@ -237,7 +237,7 @@ class HTMLBuilder {
                 $Type = ((in_array(lowercase($ResponseType), $LegalResponseContainerTypes)) ? lowercase($ResponseType) : null);
 
                 $ResponseContainerElement = (($Type !== null) ? "<div id=\"response-container-{$Type}\" class=\"response-container-{$Type}\"></div>" : null);
-            } else if(is_array($ResponseType)) {
+            } else if(is_array($ResponseType) && count($ResponseType) > 0) {
                 $ResponseContainerElement = "";
 
                 foreach($ResponseType as $Type) {
