@@ -23,3 +23,6 @@ ngrok http 80
 Send the link to your target.  
 
 Example link using ngrok: http://af9cea23de3.ngrok.io/CookieCatch/
+
+### Disclaimer  
+See [CookieCatch Disclaimer](https://github.com/4xx404/CookieCatch/blob/master/DISCLAIMER.md)
